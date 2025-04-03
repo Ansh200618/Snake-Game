@@ -9,6 +9,7 @@
 int i, j, x, y, fruitX, fruitY, score, gameOver;
 int tailX[100], tailY[100];
 int nTail;
+int highScore = 0;
 enum eDirecton { STOP = 0, LEFT, RIGHT, UP, DOWN };
 enum eDirecton dir;
 
@@ -20,6 +21,7 @@ void setup() {
     fruitX = rand() % WIDTH;
     fruitY = rand() % HEIGHT;
     score = 0;
+    nTail = 0;
 }
 
 void draw() {
@@ -61,7 +63,18 @@ void draw() {
     for (i = 0; i < WIDTH + 2; i++)
         printf("#");
     printf("\n");
+
     printf("Score: %d\n", score);
+    printf("High Score: %d\n", highScore);
+
+    if (gameOver) {
+        printf("Game Over!\n");
+        if (score > highScore) {
+            highScore = score;
+            printf("New High Score!\n");
+        }
+        printf("Press 'r' to restart or any other key to exit...\n");
+    }
 }
 
 void input() {
@@ -132,11 +145,20 @@ void logic() {
 }
 
 int main() {
-    setup();
-    while (!gameOver) {
+    char choice;
+    do {
+        setup();
+        while (!gameOver) {
+            draw();
+            input();
+            logic();
+            Sleep(100); // Add some delay to control game speed
+        }
+
+        // Display the final message and wait for user input before exiting or restarting
         draw();
-        input();
-        logic(); 
-    }
+        choice = _getch();
+    } while (choice == 'r');
+
     return 0;
 }
