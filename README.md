@@ -19,6 +19,7 @@ This project is a simple, console-based Snake game implemented in C. The code de
   - `'w'` for moving up  
   - `'s'` for moving down  
   - `'x'` to exit the game
+  - `'r'` to restart the game
 
 - **Game Logic:**  
   Updates the snake’s position based on user input, manages the tail by shifting previous positions, handles game boundary wrap-around (so the snake reappears on the opposite side), and detects collisions with the fruit or itself.
